@@ -25,21 +25,10 @@
                                 name="quantity"
                                 value="1"
                                 min="1"
+                                list="quantity-options"
                                 inputmode="numeric"
                                 autocomplete="off"
                             >
-                            <button
-                                type="button"
-                                class="quantity-toggle"
-                                aria-label="Open quick quantity choices"
-                                aria-expanded="false"
-                            >
-                            </button>
-                            <span class="quantity-menu" hidden>
-                                @for ($quantity = 1; $quantity <= 10; $quantity++)
-                                    <button type="button" data-quantity="{{ $quantity }}">{{ $quantity }}</button>
-                                @endfor
-                            </span>
                         </span>
                     </div>
                     <button type="submit" class="btn btn-primary">Add to cart</button>
@@ -48,47 +37,9 @@
         @endforeach
     </div>
 
-    <script>
-        document.querySelectorAll('.quantity-combo').forEach((combo) => {
-            const input = combo.querySelector('input');
-            const toggle = combo.querySelector('.quantity-toggle');
-            const menu = combo.querySelector('.quantity-menu');
-
-            toggle.addEventListener('click', () => {
-                const willOpen = menu.hidden;
-
-                document.querySelectorAll('.quantity-menu').forEach((openMenu) => {
-                    openMenu.hidden = true;
-                    openMenu.closest('.quantity-combo')
-                        .querySelector('.quantity-toggle')
-                        .setAttribute('aria-expanded', 'false');
-                });
-
-                menu.hidden = !willOpen;
-                toggle.setAttribute('aria-expanded', String(willOpen));
-            });
-
-            menu.querySelectorAll('button').forEach((option) => {
-                option.addEventListener('click', () => {
-                    input.value = option.dataset.quantity;
-                    menu.hidden = true;
-                    toggle.setAttribute('aria-expanded', 'false');
-                    input.focus();
-                });
-            });
-        });
-
-        document.addEventListener('click', (event) => {
-            if (event.target.closest('.quantity-combo')) {
-                return;
-            }
-
-            document.querySelectorAll('.quantity-menu').forEach((menu) => {
-                menu.hidden = true;
-                menu.closest('.quantity-combo')
-                    .querySelector('.quantity-toggle')
-                    .setAttribute('aria-expanded', 'false');
-            });
-        });
-    </script>
+    <datalist id="quantity-options">
+        @for ($quantity = 1; $quantity <= 10; $quantity++)
+            <option value="{{ $quantity }}">
+        @endfor
+    </datalist>
 @endsection
