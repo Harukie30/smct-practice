@@ -13,6 +13,19 @@ and product is generated.
 - Seeded demo data: ~3,000 orders across ~600 customers and 40 products.
 - A handful of feature tests (`php artisan test`).
 
+## Dev Status Log
+
+### 2026-07-20
+
+- `main` contains the current storefront practice app and is ahead of `origin/main`
+  by the local admin-login planning merge.
+- Added the admin login product requirements spec at `docs/admin-login-prd.md`.
+- Created a `backend-stuff` worktree/branch for backend planning and merged its PRD
+  commit back into `main`.
+- No admin login implementation has been built yet. The next backend step is to add
+  the `is_admin` user flag, admin middleware, `/admin` route group, dashboard
+  placeholder, navigation visibility, and feature tests described in the PRD.
+
 ## Setup (about 5 minutes)
 
 ```bash
